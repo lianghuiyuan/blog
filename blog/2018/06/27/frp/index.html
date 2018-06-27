@@ -33,34 +33,38 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9b1b5e7">1. frp简介：</a>
+<li><a href="#org3999a9d">1. frp简介：</a>
 <ul>
-<li><a href="#orgbc0faf4">1.1. frp的作用</a></li>
-<li><a href="#org8d33c2c">1.2. 架构</a></li>
+<li><a href="#org15f8b03">1.1. frp的作用</a></li>
+<li><a href="#org9fdc56e">1.2. 架构</a></li>
 </ul>
 </li>
-<li><a href="#orgad3bf2a">2. frp配置</a></li>
-<li><a href="#orge72f1c0">3. 使用frp</a></li>
-<li><a href="#org9ff255b">4. 注意：</a></li>
-<li><a href="#org169cdac">5. 问题</a></li>
+<li><a href="#org2de2890">2. frp配置</a></li>
+<li><a href="#org62a7365">3. 使用frp</a></li>
+<li><a href="#orgd82f712">4. 注意：</a></li>
+<li><a href="#orgfad78ff">5. 问题</a></li>
 </ul>
 </div>
 </div>
+<p>
+####+AUTHOR:
+</p>
+
 <pre class="example">
 项目连接：https://github.com/fatedier/frp
 readme文档：https://github.com/fatedier/frp/blob/master/README_zh.md
 Release安装文件：https://github.com/fatedier/frp/releases
 </pre>
 
-<div id="outline-container-org9b1b5e7" class="outline-2">
-<h2 id="org9b1b5e7"><span class="section-number-2">1</span> frp简介：</h2>
+<div id="outline-container-org3999a9d" class="outline-2">
+<h2 id="org3999a9d"><span class="section-number-2">1</span> frp简介：</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp, http, https 协议。
 </p>
 </div>
-<div id="outline-container-orgbc0faf4" class="outline-3">
-<h3 id="orgbc0faf4"><span class="section-number-3">1.1</span> frp的作用</h3>
+<div id="outline-container-org15f8b03" class="outline-3">
+<h3 id="org15f8b03"><span class="section-number-3">1.1</span> frp的作用</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>利用处于内网或防火墙后的机器，对外网环境提供 http 或 https 服务。</li>
@@ -70,8 +74,8 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 </div>
 </div>
 
-<div id="outline-container-org8d33c2c" class="outline-3">
-<h3 id="org8d33c2c"><span class="section-number-3">1.2</span> 架构</h3>
+<div id="outline-container-org9fdc56e" class="outline-3">
+<h3 id="org9fdc56e"><span class="section-number-3">1.2</span> 架构</h3>
 <div class="outline-text-3" id="text-1-2">
 
 <div class="figure">
@@ -82,8 +86,8 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 </div>
 </div>
 
-<div id="outline-container-orgad3bf2a" class="outline-2">
-<h2 id="orgad3bf2a"><span class="section-number-2">2</span> frp配置</h2>
+<div id="outline-container-org2de2890" class="outline-2">
+<h2 id="org2de2890"><span class="section-number-2">2</span> frp配置</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 详情请参见以下三个文件：
@@ -96,7 +100,7 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 
 
 <ul class="org-ul">
-<li>配置文件中使用的用户名: intorobot   密码：26554422</li>
+<li>配置文件中使用的用户名: creasy   密码：123456</li>
 <li>暂时映射到testjumper服务器的域名为: '*.fonzi.cn', 二级域名请使用<a href="./frp/frpc_45.ini">frpc-45.ini</a>的配置并修改'subdomain = local45'</li>
 <li>frpc与frps通过端口7000保持链接</li>
 <li>访问内网45服务器http的代理端口号为8181</li>
@@ -110,8 +114,8 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 </div>
 
 
-<div id="outline-container-orge72f1c0" class="outline-2">
-<h2 id="orge72f1c0"><span class="section-number-2">3</span> 使用frp</h2>
+<div id="outline-container-org62a7365" class="outline-2">
+<h2 id="org62a7365"><span class="section-number-2">3</span> 使用frp</h2>
 <div class="outline-text-2" id="text-3">
 <ol class="org-ol">
 <li>根据对应的操作系统及架构，从 <a href="https://github.com/fatedier/frp/releases">Release</a> 页面下载最新版本的程序。</li>
@@ -123,9 +127,9 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 </ul></li>
 <li>修改配置文件
 <ul class="org-ul">
-<li>将&lt;<a href="#orgad3bf2a">frp配置</a>&gt;中的frps<sub>testjumper.ini替换公网IP机器上的frps.ini</sub>    (我已在公网testjumper上设置，可略过)</li>
-<li>将&lt;<a href="#orgad3bf2a">frp配置</a>&gt;中的frpc<sub>45.ini替换内网IP机器上的frpc.ini</sub>            (我已在内网45服务器上设置，需要在公司内网自己的机器上部署内网穿透请同理执行此步骤)</li>
-<li>将&lt;<a href="#orgad3bf2a">frp配置</a>&gt;中的frpc<sub>local.ini替换放置在你当前工作的机器上的frpc.ini</sub>    (请替换文件)</li>
+<li>将&lt;<a href="#org2de2890">frp配置</a>&gt;中的frps<sub>testjumper.ini替换公网IP机器上的frps.ini</sub>    (我已在公网testjumper上设置，可略过)</li>
+<li>将&lt;<a href="#org2de2890">frp配置</a>&gt;中的frpc<sub>45.ini替换内网IP机器上的frpc.ini</sub>            (我已在内网45服务器上设置，需要在公司内网自己的机器上部署内网穿透请同理执行此步骤)</li>
+<li>将&lt;<a href="#org2de2890">frp配置</a>&gt;中的frpc<sub>local.ini替换放置在你当前工作的机器上的frpc.ini</sub>    (请替换文件)</li>
 </ul></li>
 <li><p>
 启动frps和frpc
@@ -170,7 +174,7 @@ $ ./frpc -c ./frpc_local.ini &amp;           # (请进入你当前工作的机�
 </p>
 
 <p>
-通过浏览器打开链接：<a href="http://local45.fonzi.cn:6006/static/">http://local45.fonzi.cn:6006/static/</a> (用户名：intorobot   pwd: 26554422)
+通过浏览器打开链接：<a href="http://local45.fonzi.cn:6006/static/">http://local45.fonzi.cn:6006/static/</a> (用户名：creasy   pwd: 123456)
 </p></li>
 
 <li><p>
@@ -185,8 +189,8 @@ $ ./frpc -c ./frpc_local.ini &amp;           # (请进入你当前工作的机�
 ssh -oPort=9000 mzy@127.0.0.1
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"># 远程登陆内网45服务器(用户名:mzy pwd:26554422)
-$ [lianghuiyuan:~] 1h14m9s $ ssh -oPort=9000 mzy@127.0.0.1
+<pre class="src src-bash"># 远程登陆内网45服务器(用户名:mzy pwd:123456)
+$ [creasy:~] 1h14m9s $ ssh -oPort=9000 mzy@127.0.0.1
   Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.8.0-49-generic x86_64)
 
    * Documentation:  https://help.ubuntu.com
@@ -258,8 +262,8 @@ admin_port = 7400
 </div>
 
 
-<div id="outline-container-org9ff255b" class="outline-2">
-<h2 id="org9ff255b"><span class="section-number-2">4</span> 注意：</h2>
+<div id="outline-container-orgd82f712" class="outline-2">
+<h2 id="orgd82f712"><span class="section-number-2">4</span> 注意：</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li><b>目前除了 xtcp 外，其他类型的内网穿透模式的流量都需要经过 frps 所在服务器中转，消耗服务器流量资源</b></li>
@@ -269,8 +273,8 @@ admin_port = 7400
 </div>
 
 
-<div id="outline-container-org169cdac" class="outline-2">
-<h2 id="org169cdac"><span class="section-number-2">5</span> 问题</h2>
+<div id="outline-container-orgfad78ff" class="outline-2">
+<h2 id="orgfad78ff"><span class="section-number-2">5</span> 问题</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><p>
