@@ -80,7 +80,7 @@ Release安装文件：https://github.com/fatedier/frp/releases
         ssh -oPort=9000 mzy@127.0.0.1
         #+BEGIN_SRC bash
         # 远程登陆内网45服务器(用户名:mzy pwd:123456)
-        $ [lianghuiyuan:~] 1h14m9s $ ssh -oPort=9000 mzy@127.0.0.1
+        $ [creasy:~] 1h14m9s $ ssh -oPort=9000 mzy@127.0.0.1
           Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.8.0-49-generic x86_64)
           
            * Documentation:  https://help.ubuntu.com
