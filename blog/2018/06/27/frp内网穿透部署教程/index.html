@@ -1,56 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0">
-  <channel>
-    <title>Mr.L</title>
-    <link>http://www.i1987.com/</link>
-    <description>hello, Mr.L</description>
-    <pubDate>Wed, 27 Jun 2018 23:20:06 CST</pubDate>
-    <lastBuildDate>Wed, 27 Jun 2018 23:20:06 CST</lastBuildDate>
-    <docs>http://www.rssboard.org/rss-specification</docs>
-    <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
-    <item>
-      <title>Untitled</title>
-      <link>http://www.i1987.com/blog/2018/06/27/untitled/</link>
-      <description><![CDATA[<div>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>frp内网穿透部署教程 - Mr.L</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Creasy.L" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">Mr.L</a></h1>
+        <p>hello, Mr.L</p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="https://github.com/lianghuiyuan">GitHub</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+        <form method="get" id="searchform" action="//www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="www.i1987.com">
+        </form>
+      </header>
+    </div>
+
+<div>
 <div class="post">
-<h1>Untitled</h1>
+<h1>frp内网穿透部署教程</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgeb9ecc7">1. frp简介：</a>
+<li><a href="#orgb295847">1. frp简介：</a>
 <ul>
-<li><a href="#org1b8f1d9">1.1. frp的作用</a></li>
-<li><a href="#org7f44b24">1.2. 架构</a></li>
+<li><a href="#org10bf98e">1.1. frp的作用</a></li>
+<li><a href="#orga59f98c">1.2. 架构</a></li>
 </ul>
 </li>
-<li><a href="#org7e8b14d">2. frp配置</a></li>
-<li><a href="#orgb98b25a">3. 使用frp</a></li>
-<li><a href="#org407bf41">4. 注意：</a></li>
-<li><a href="#org48eb3a3">5. 问题</a></li>
+<li><a href="#orge54bd40">2. frp配置</a></li>
+<li><a href="#org551808a">3. 使用frp</a></li>
+<li><a href="#org856cfb9">4. 注意：</a></li>
+<li><a href="#org70a9911">5. 问题</a></li>
 </ul>
 </div>
 </div>
-<p>
-#####+TITLE: frp
-####+AUTHOR:
-</p>
-
 <pre class="example">
 项目连接：https://github.com/fatedier/frp
 readme文档：https://github.com/fatedier/frp/blob/master/README_zh.md
 Release安装文件：https://github.com/fatedier/frp/releases
 </pre>
 
-<div id="outline-container-orgeb9ecc7" class="outline-2">
-<h2 id="orgeb9ecc7"><span class="section-number-2">1</span> frp简介：</h2>
+<div id="outline-container-orgb295847" class="outline-2">
+<h2 id="orgb295847"><span class="section-number-2">1</span> frp简介：</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp, http, https 协议。
 </p>
 </div>
-<div id="outline-container-org1b8f1d9" class="outline-3">
-<h3 id="org1b8f1d9"><span class="section-number-3">1.1</span> frp的作用</h3>
+<div id="outline-container-org10bf98e" class="outline-3">
+<h3 id="org10bf98e"><span class="section-number-3">1.1</span> frp的作用</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>利用处于内网或防火墙后的机器，对外网环境提供 http 或 https 服务。</li>
@@ -60,8 +70,8 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 </div>
 </div>
 
-<div id="outline-container-org7f44b24" class="outline-3">
-<h3 id="org7f44b24"><span class="section-number-3">1.2</span> 架构</h3>
+<div id="outline-container-orga59f98c" class="outline-3">
+<h3 id="orga59f98c"><span class="section-number-3">1.2</span> 架构</h3>
 <div class="outline-text-3" id="text-1-2">
 
 <div class="figure">
@@ -72,8 +82,8 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 </div>
 </div>
 
-<div id="outline-container-org7e8b14d" class="outline-2">
-<h2 id="org7e8b14d"><span class="section-number-2">2</span> frp配置</h2>
+<div id="outline-container-orge54bd40" class="outline-2">
+<h2 id="orge54bd40"><span class="section-number-2">2</span> frp配置</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 详情请参见以下三个文件：
@@ -86,7 +96,7 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 
 
 <ul class="org-ul">
-<li>配置文件中使用的用户名: creasy   密码：123456</li>
+<li>配置文件中使用的用户名: intorobot   密码：26554422</li>
 <li>暂时映射到testjumper服务器的域名为: '*.fonzi.cn', 二级域名请使用<a href="./frp/frpc_45.ini">frpc-45.ini</a>的配置并修改'subdomain = local45'</li>
 <li>frpc与frps通过端口7000保持链接</li>
 <li>访问内网45服务器http的代理端口号为8181</li>
@@ -100,8 +110,8 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 </div>
 
 
-<div id="outline-container-orgb98b25a" class="outline-2">
-<h2 id="orgb98b25a"><span class="section-number-2">3</span> 使用frp</h2>
+<div id="outline-container-org551808a" class="outline-2">
+<h2 id="org551808a"><span class="section-number-2">3</span> 使用frp</h2>
 <div class="outline-text-2" id="text-3">
 <ol class="org-ol">
 <li>根据对应的操作系统及架构，从 <a href="https://github.com/fatedier/frp/releases">Release</a> 页面下载最新版本的程序。</li>
@@ -113,9 +123,9 @@ frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp
 </ul></li>
 <li>修改配置文件
 <ul class="org-ul">
-<li>将&lt;<a href="#org7e8b14d">frp配置</a>&gt;中的frps<sub>testjumper.ini替换公网IP机器上的frps.ini</sub>    (我已在公网testjumper上设置，可略过)</li>
-<li>将&lt;<a href="#org7e8b14d">frp配置</a>&gt;中的frpc<sub>45.ini替换内网IP机器上的frpc.ini</sub>            (我已在内网45服务器上设置，需要在公司内网自己的机器上部署内网穿透请同理执行此步骤)</li>
-<li>将&lt;<a href="#org7e8b14d">frp配置</a>&gt;中的frpc<sub>local.ini替换放置在你当前工作的机器上的frpc.ini</sub>    (请替换文件)</li>
+<li>将&lt;<a href="#orge54bd40">frp配置</a>&gt;中的frps<sub>testjumper.ini替换公网IP机器上的frps.ini</sub>    (我已在公网testjumper上设置，可略过)</li>
+<li>将&lt;<a href="#orge54bd40">frp配置</a>&gt;中的frpc<sub>45.ini替换内网IP机器上的frpc.ini</sub>            (我已在内网45服务器上设置，需要在公司内网自己的机器上部署内网穿透请同理执行此步骤)</li>
+<li>将&lt;<a href="#orge54bd40">frp配置</a>&gt;中的frpc<sub>local.ini替换放置在你当前工作的机器上的frpc.ini</sub>    (请替换文件)</li>
 </ul></li>
 <li><p>
 启动frps和frpc
@@ -160,7 +170,7 @@ $ ./frpc -c ./frpc_local.ini &amp;           # (请进入你当前工作的机�
 </p>
 
 <p>
-通过浏览器打开链接：<a href="http://local45.fonzi.cn:6006/static/">http://local45.fonzi.cn:6006/static/</a> (用户名：creasy   pwd: 123456)
+通过浏览器打开链接：<a href="http://local45.fonzi.cn:6006/static/">http://local45.fonzi.cn:6006/static/</a> (用户名：intorobot   pwd: 26554422)
 </p></li>
 
 <li><p>
@@ -175,7 +185,7 @@ $ ./frpc -c ./frpc_local.ini &amp;           # (请进入你当前工作的机�
 ssh -oPort=9000 mzy@127.0.0.1
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"># 远程登陆内网45服务器(用户名:mzy pwd:123456)
+<pre class="src src-bash"># 远程登陆内网45服务器(用户名:mzy pwd:26554422)
 $ [lianghuiyuan:~] 1h14m9s $ ssh -oPort=9000 mzy@127.0.0.1
   Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.8.0-49-generic x86_64)
 
@@ -248,8 +258,8 @@ admin_port = 7400
 </div>
 
 
-<div id="outline-container-org407bf41" class="outline-2">
-<h2 id="org407bf41"><span class="section-number-2">4</span> 注意：</h2>
+<div id="outline-container-org856cfb9" class="outline-2">
+<h2 id="org856cfb9"><span class="section-number-2">4</span> 注意：</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li><b>目前除了 xtcp 外，其他类型的内网穿透模式的流量都需要经过 frps 所在服务器中转，消耗服务器流量资源</b></li>
@@ -259,8 +269,8 @@ admin_port = 7400
 </div>
 
 
-<div id="outline-container-org48eb3a3" class="outline-2">
-<h2 id="org48eb3a3"><span class="section-number-2">5</span> 问题</h2>
+<div id="outline-container-org70a9911" class="outline-2">
+<h2 id="org70a9911"><span class="section-number-2">5</span> 问题</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><p>
@@ -308,9 +318,56 @@ frpc 能否在系统启动阶段无网络时一直等待而不是直接退出？
 </div>
 
 </div>
-</div>]]></description>
-      <pubDate>2018-06-27</pubDate>
-      <guid>http://www.i1987.com/blog/2018/06/27/untitled/</guid>
-    </item>
-  </channel>
-</rss>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2018-06-27</span>
+        <span title="last modification date" class="post-info">2018-06-27</span>
+        <span title="tags" class="post-info">N/A</span>
+        <span title="author" class="post-info">Creasy.L</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/2018/06/27/frp内网穿透部署教程/";
+          var disqus_url = "http://www.i1987.com/blog/2018/06/27/frp内网穿透部署教程/";
+          var disqus_shortname = 'shmilyliang';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="//disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </section>
+      <script src="//code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'userid_of_google_analytics']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:lianghuiyuan &lt;at&gt; 126 &lt;dot&gt; com">Creasy.L</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>
