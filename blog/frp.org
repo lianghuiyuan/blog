@@ -1,4 +1,6 @@
-* frp内网穿透部署教程
+#####+TITLE: frp
+####+AUTHOR:
+
 #+BEGIN_example
 项目连接：https://github.com/fatedier/frp
 readme文档：https://github.com/fatedier/frp/blob/master/README_zh.md
@@ -24,7 +26,7 @@ Release安装文件：https://github.com/fatedier/frp/releases
    
 
 
-   - 配置文件中使用的用户名: intorobot   密码：26554422
+   - 配置文件中使用的用户名: creasy   密码：123456
    - 暂时映射到testjumper服务器的域名为: '*.fonzi.cn', 二级域名请使用[[./frp/frpc_45.ini][frpc-45.ini]]的配置并修改'subdomain = local45'   
    - frpc与frps通过端口7000保持链接
    - 访问内网45服务器http的代理端口号为8181
@@ -69,7 +71,7 @@ Release安装文件：https://github.com/fatedier/frp/releases
 
       - 通过浏览器访问位于内网45服务器上的api接口
         
-        通过浏览器打开链接：http://local45.fonzi.cn:6006/static/ (用户名：intorobot   pwd: 26554422)
+        通过浏览器打开链接：http://local45.fonzi.cn:6006/static/ (用户名：creasy   pwd: 123456)
 
       - 测试ssh
 
@@ -77,7 +79,7 @@ Release安装文件：https://github.com/fatedier/frp/releases
 
         ssh -oPort=9000 mzy@127.0.0.1
         #+BEGIN_SRC bash
-        # 远程登陆内网45服务器(用户名:mzy pwd:26554422)
+        # 远程登陆内网45服务器(用户名:mzy pwd:123456)
         $ [lianghuiyuan:~] 1h14m9s $ ssh -oPort=9000 mzy@127.0.0.1
           Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.8.0-49-generic x86_64)
           
