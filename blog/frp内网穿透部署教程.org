@@ -1,0 +1,151 @@
+#+BEGIN_example
+项目连接：https://github.com/fatedier/frp
+readme文档：https://github.com/fatedier/frp/blob/master/README_zh.md
+Release安装文件：https://github.com/fatedier/frp/releases
+#+END_example
+
+** frp简介：
+
+  frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp, http, https 协议。
+*** frp的作用
+    - 利用处于内网或防火墙后的机器，对外网环境提供 http 或 https 服务。
+    - 对于 http, https 服务支持基于域名的虚拟主机，支持自定义域名绑定，使多个域名可以共用一个80端口。
+    - 利用处于内网或防火墙后的机器，对外网环境提供 tcp 和 udp 服务，例如在家里通过 ssh 访问处于公司内网环境内的主机。
+      
+*** 架构
+[[./frp/frp-architecture.png]]
+
+** frp配置
+
+   详情请参见以下三个文件：
+
+   1. [[file:frp/frps_testjumper.ini][frps-testjumper.ini]]     2. [[./frp/frpc_45.ini][frpc-45.ini]]    3. [[./frp/frpc_local.ini][frpc-local.ini]]
+   
+
+
+   - 配置文件中使用的用户名: intorobot   密码：26554422
+   - 暂时映射到testjumper服务器的域名为: '*.fonzi.cn', 二级域名请使用[[./frp/frpc_45.ini][frpc-45.ini]]的配置并修改'subdomain = local45'   
+   - frpc与frps通过端口7000保持链接
+   - 访问内网45服务器http的代理端口号为8181
+   - 访问内网45服务器https的代理端口号为4133
+   - frps的dashboard端口为7500
+   - frps当前设置连接池上限为5个，frpc客户端指定预创建链接的数量为5个
+   - frps与frpc所在的最长时间差authentication_timeout设置为15min，时间戳会用于加密验证中，防止报文被劫持后被他人利用
+   - testjumper上的frps日志文件最长保留5天，内网45服务器上frpc日志文件最长保留15天
+
+
+** 使用frp
+   1) 根据对应的操作系统及架构，从 [[https://github.com/fatedier/frp/releases][Release]] 页面下载最新版本的程序。
+   2) 将程序和配置文件分别放到机器上
+      - 将 frps 及 frps.ini 放到具有公网 IP 的机器上任意目录下。    (我已在公网testjumper上设置，可略过)
+      - 将 frpc 及 frpc.ini 放到处于内网环境的机器上任意目录下。     (我已在内网45服务器上设置，需要在公司内网自己的机器上部署内网穿透请同理执行此步骤)
+      - 将 frpc 及 frpc.ini 放到你当前工作的机器上任意目录下。       (根据对应的操作系统及架构, 请自行到  [[https://github.com/fatedier/frp/releases][Release]] 下载程序)
+   3) 修改配置文件
+      - 将<[[frp配置][frp配置]]>中的frps_testjumper.ini替换公网IP机器上的frps.ini    (我已在公网testjumper上设置，可略过)
+      - 将<[[frp配置][frp配置]]>中的frpc_45.ini替换内网IP机器上的frpc.ini            (我已在内网45服务器上设置，需要在公司内网自己的机器上部署内网穿透请同理执行此步骤)
+      - 将<[[frp配置][frp配置]]>中的frpc_local.ini替换放置在你当前工作的机器上的frpc.ini    (请替换文件)
+   4) 启动frps和frpc
+      #+BEGIN_SRC bash
+       # 进入公网IP机器的frps目录, 后台启动frps
+       $ ./frps -c ./frps_testjumper.ini &      # (我已在公网testjumper服务器上启动服务，可略过)
+       # 进入内网IP机器的frpc目录, 后台启动frpc
+       $ ./frpc -c ./frpc_45.ini &              # (我已在内网45服务器上启动服务，需要在公司内网自己的机器上部署内网穿透请同理执行此步骤)
+       # 进入你当前工作的机器的frpc目录, 后台启动frpc
+       $ ./frpc -c ./frpc_local.ini &           # (请进入你当前工作的机器执行此命令)
+      #+END_SRC
+   5) 测试frp是否正常工作
+      - 打开dashboard页面(外网frps绑定dashboard端口：7500)
+
+        通过浏览器打开链接：http://local45.fonzi.cn:7500
+
+      - 测试内网服务器的http服务(外网frps绑定http端口：8181)
+
+        通过浏览器打开连接：http://local45.fonzi.cn:8181
+
+      - 测试内网服务器的https服务(外网frps绑定https端口：4133)
+
+        通过浏览器打开连接：https://local45.fonzi.cn:4133
+
+      - 通过浏览器访问位于内网45服务器上的api接口
+        
+        通过浏览器打开链接：http://local45.fonzi.cn:6006/static/ (用户名：intorobot   pwd: 26554422)
+
+      - 测试ssh
+
+        当前采用的是stcp的方案安全的暴露内网服务(通过stcp绑定的本地端口: 9000 ssh访问内网机器)
+
+        ssh -oPort=9000 mzy@127.0.0.1
+        #+BEGIN_SRC bash
+        # 远程登陆内网45服务器(用户名:mzy pwd:26554422)
+        $ [lianghuiyuan:~] 1h14m9s $ ssh -oPort=9000 mzy@127.0.0.1
+          Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.8.0-49-generic x86_64)
+          
+           * Documentation:  https://help.ubuntu.com
+           * Management:     https://landscape.canonical.com
+           * Support:        https://ubuntu.com/advantage
+          
+          469 packages can be updated.
+          225 updates are security updates.
+          
+          Last login: Fri Feb  9 21:19:31 2018 from 127.0.0.1
+          Cannot open display "default display"
+          mzy@mzy:~$
+        #+END_SRC
+
+      - 通过内网网络上网(即在家里通过公司网络上网)
+
+        浏览器设置 http 或 socks5 代理地址为 local45.fonzi.cn:6004 / local45.fonzi.cn:6005，通过 frpc 机器的网络访问互联网。
+
+        *注意：通过代理到内网上网将会导致服务器流量增大耗费流量资源*
+
+   6) frpc热加载配置文件
+       
+       当修改了 frpc 中的代理配置，可以通过 frpc reload 命令来动态加载配置文件，通常会在 10 秒内完成代理的更新。执行命令如下：
+
+       #+BEGIN_SRC bash
+        frpc reload -c ./frpc_45.ini   #此处配置文件请根据情况自行修改
+       #+END_SRC
+
+     - 启用此功能需要在 frpc 中启用 admin 端口，用于提供 API 服务。配置如下：
+       #+BEGIN_SRC bash
+        # frpc.ini
+        [common]
+        admin_addr = 127.0.0.1
+        admin_port = 7400
+       #+END_SRC
+
+     - 需要注意的是，[common] 中的参数除了 start 外目前无法被修改。
+
+   7) 客户端查看代理状态 
+      #+BEGIN_SRC bash
+        frpc status -c ./frpc_45.ini    #此处配置文件请根据情况自行修改
+      #+END_SRC 
+    - 此功能需要在 frpc 中配置 admin 端口
+      
+      
+** 注意：
+    - *目前除了 xtcp 外，其他类型的内网穿透模式的流量都需要经过 frps 所在服务器中转，消耗服务器流量资源*
+    - *请确保你安装frpc的机器的时间与公网IP机器的时间相差在15min以内，否则frpc启动过程中会出现:客户端连接失败，提示 authorization timeout*
+
+
+** 问题
+- 流量是否经过服务器中转？
+
+  目前除了 xtcp 外，其他类型的内网穿透模式的流量都需要经过 frps 所在服务器中转。
+
+- 网络传输速度慢是什么原因？
+
+  由于流量需要经过服务器转发，所以传输速度的快慢取决于服务器的下行带宽和客户端的上行带宽，通常家用宽带的上行带宽较低，限制了出口的速度。
+  另外一种情况是服务器部署在国外的 VPS 上，丢包率较高，也会影响到传输速度。这种情况下可以考虑开启 kcp 传输模式。
+
+- 客户端连接失败，提示 authorization failed
+
+  出现这种情况说明鉴权失败，检查 frps 和 frpc 的配置文件中的 privilege_token 是否一致。
+
+  客户端连接失败，提示 authorization timeout
+
+  出现这种情况是因为 frps 所在服务器和 frpc 所在服务器的系统时间相差较大。如果不希望在身份校验时加入系统时间，可以将 frps 配置文件中的 authentication_timeout 设置为 0 来解决这个问题。
+
+- frpc 能否在系统启动阶段无网络时一直等待而不是直接退出？
+
+  在 frpc 的配置文件中将 login_fail_exit 设置为 false，则 frpc 启动后会不断尝试连接 frps，直到连接成功，而不是直接退出。
